@@ -1,0 +1,14 @@
+= button_to 'sign out', destroy_user_session_path, method: :delete
+h3 = "Hello #{@user_info['id']}"
+
+= link_to 'share playlist', share_playlist_path, method: 'post'
+
+ul
+  -  @user_playlists['items'].each do |pl|
+    li
+      h5 = pl['name']
+      = image_tag pl['images'].first['url']
+      p = link_to 'external link', pl['external_urls']['spotify']
+      p = pl['tracks']['total']
+
+
