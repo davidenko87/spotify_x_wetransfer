@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
   def export_to_transfer
     @user_playlists = SpotifyCollector.new(current_user).user_playlists
     items_to_export = []
-    @user_playlists['items'].each do |pl|
+    @user_playlists.each do |pl|
       item = {}
       item[:link] = pl['external_urls']['spotify']
       item[:image] = image_to_tempfile(pl['images'].first['url'], pl['name'])

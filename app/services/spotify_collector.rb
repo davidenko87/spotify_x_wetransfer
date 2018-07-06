@@ -10,7 +10,22 @@ class SpotifyCollector
   end
 
   def user_playlists
-    connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists")
+    list = []
+    resp = connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists?limit=50")
+    list << resp['items']
+    if resp['next'].present?
+      resp = connection(resp['next'])
+      list << resp['items']
+      if resp['next'].present?
+        resp = connection(resp['next'])
+        list << resp['items']
+      end
+    end
+    list.flatten!
+  end
+
+  def playlists_tracks(playlist_id)
+    connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists/#{playlist_id}/tracks")
   end
 
   def connection(url)

@@ -12,7 +12,7 @@
     .cell
       h6 = 'This are all your playlists saved on your account:'
   .row.mt-8
-    -  @user_playlists['items'].each do |pl|
+    -  @user_playlists.each do |pl|
       = link_to pl['external_urls']['spotify'] do
         . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
           span.branding-bar = pl['name']
