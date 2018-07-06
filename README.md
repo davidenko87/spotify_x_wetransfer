@@ -11,6 +11,8 @@ Register a Spotify APP: [developer.spotify.com](developer.spotify.com) and make 
 
 Put those into the .env file file (I provided a .example.env)
 
+To install all dependencies run `bundle install`
+
 Then run `rails db:create` for creating the database
 
 And run `rails server` to test.
