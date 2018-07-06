@@ -1,0 +1,9 @@
+.app-bar-expand-md data-role='appbar'
+  = link_to '#', class: 'brand no-hover' do
+    = 'WeSpotify'
+  ul.app-bar-menu
+    - if current_user
+      li = link_to 'Dashboard', dashboard_path
+      li = link_to 'Sign out', destroy_user_session_path, method: :delete
+    - else
+      li = link_to 'Login with spotify', user_spotify_omniauth_authorize_path

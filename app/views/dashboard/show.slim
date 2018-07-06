@@ -1,14 +1,20 @@
-= button_to 'sign out', destroy_user_session_path, method: :delete
-h3 = "Hello #{@user_info['id']}"
-
-= link_to 'share playlist', share_playlist_path, method: 'post'
-
-ul
-  -  @user_playlists['items'].each do |pl|
-    li
-      h5 = pl['name']
-      = image_tag pl['images'].first['url']
-      p = link_to 'external link', pl['external_urls']['spotify']
-      p = pl['tracks']['total']
-
+.grid
+  .row
+    .cell
+      h2
+        = "Hello "
+        small
+          = @user_info['id']
+    .cell
+      .place-right.mt-2
+        = link_to 'Share playlist', share_playlist_path, method: 'post', class: 'button primary outline'
+  .row
+    .cell
+      h6 = 'This are all your playlists saved on your account:'
+  .row.mt-8
+    -  @user_playlists['items'].each do |pl|
+      = link_to pl['external_urls']['spotify'] do
+        . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
+          span.branding-bar = pl['name']
+          span.badge-top = pl['tracks']['total']
 

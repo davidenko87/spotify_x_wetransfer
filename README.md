@@ -1,24 +1,16 @@
-# README
+# WeTransfer X Spotify
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Using this will help you sharing your playlist with friends through WeTransfer.
 
-Things you may want to cover:
+When you login, you will have a overview of all the playlist on your account. Next to the overview you'll have the posibility to share all your playlist via a WeTransfer link.
 
-* Ruby version
+### Instalation
 
-* System dependencies
+Request a WeTransfer API key: [developers.wetransfer.com](developers.wetransfer.com)
+Register a Spotify APP: [developer.spotify.com](developer.spotify.com) and make sure you whitelist the callback url from the authentication e.q.: `http://localhost:3000/auth/spotify/callback`
 
-* Configuration
+Put those into the .env file file (I provided a .example.env)
 
-* Database creation
+Then run `rails db:create` for creating the database
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+And run `rails server` to test.
