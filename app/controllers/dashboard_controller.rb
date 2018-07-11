@@ -6,6 +6,10 @@ class DashboardController < ApplicationController
     @user_playlists = SpotifyCollector.new(current_user).user_playlists
   end
 
+  def playlist_info
+    @playlist = SpotifyCollector.new(current_user).playlists_tracks(params[:id])
+  end
+
   def export_to_transfer
     @user_playlists = SpotifyCollector.new(current_user).user_playlists
     items_to_export = []

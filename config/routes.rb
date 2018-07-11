@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
+    get '/dashboard/playlist_tracks', to: 'dashboard#playlist_info'
     post '/share_playlist', to: 'dashboard#export_to_transfer'
   end
 

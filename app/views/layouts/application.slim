@@ -8,14 +8,17 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render partial: 'layouts/partials/menu'
-    .container-fluid.mt-16
-      - if notice
-        .info-box
-          .info-box-content
-            = notice
-      - if alert
-        .info-box
-          .info-box-content
-            = alert
-      .mt-16
-        = yield
+    .mt-18
+      .notifications
+        - if notice
+          .info-box
+            .info-box-content
+              = notice
+        - if alert
+          .info-box
+            .info-box-content
+              = alert
+      .container-fluid
+        .row.flex-xl-nowrap
+          main.cell
+            = yield

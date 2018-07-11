@@ -13,8 +13,9 @@
       h6 = 'This are all your playlists saved on your account:'
   .row.mt-8
     -  @user_playlists.each do |pl|
-      = link_to pl['external_urls']['spotify'] do
+      = link_to dashboard_playlist_tracks_path(id: pl['id']) do
         . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
           span.branding-bar = pl['name']
           span.badge-top = pl['tracks']['total']
 
+/ pl['external_urls']['spotify']
