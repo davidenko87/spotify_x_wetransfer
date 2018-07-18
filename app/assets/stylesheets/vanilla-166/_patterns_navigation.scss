@@ -1,0 +1,378 @@
+@import 'settings';
+
+// Default header styling
+
+@mixin vf-p-navigation {
+  @include vf-navigation-default;
+  @include vf-navigation-sidebar;
+}
+
+@mixin vf-navigation-default {
+  .p-navigation {
+    @include vf-navigation-pattern(
+      $background-color: $color-navigation-background,
+      $border-color: if(lightness($color-navigation-background) > 50, $color-mid-light, transparent),
+      $text-color: if(lightness($color-navigation-background) > 70, $color-dark, $color-light)
+    );
+    height: $sp-xxx-large;
+  }
+}
+
+@mixin vf-navigation-sidebar {
+  .p-navigation--sidebar {
+    @include vf-navigation-pattern(
+      $background-color: $color-x-light,
+      $border-color: $color-mid-light,
+      $text-color: $color-dark
+    );
+    border-bottom: 0;
+    height: auto;
+
+    .p-navigation__logo {
+      padding: 0 $sp-medium 0 0;
+      background-color: $color-brand;
+      color: $color-brand;
+    }
+
+    .p-navigation__tagline {
+      color: $color-mid-dark;
+      display: inline-block;
+      margin-top: .2rem;
+    }
+
+    .sidebar__cta {
+      margin-top: 0;
+
+      .p-inline-list {
+        display: inline-block;
+      }
+
+      [class^="p-icon"] {
+        cursor: pointer;
+      }
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        display: none;
+      }
+    }
+
+    .sidebar__content {
+      background: $color-x-light;
+      margin-top: $sp-small;
+      padding-bottom: $sp-medium;
+      width: 100%;
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        display: block !important; // important to override u-hide util
+      }
+    }
+
+    .sidebar__link {
+      color: $color-dark;
+      display: block;
+      padding: $sp-x-small 0;
+      position: relative;
+
+      &:hover {
+        color: $color-link;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    .is-selected {
+      font-weight: bold;
+    }
+
+    .sidebar__first-level {
+      padding-left: 0;
+    }
+
+    .sidebar__third-level {
+      background-color: $color-mid-dark;
+      margin-right: -4rem;
+      padding-left: 4rem;
+      position: relative;
+      right: 3rem;
+    }
+
+    .sidebar__second-level,
+    .sidebar__third-level {
+      display: none;
+      list-style: none;
+      margin-left: 0;
+      padding-bottom: $sp-x-small;
+      padding-top: $sp-x-small;
+
+      @at-root {
+        .p-icon--minus {
+          display: none;
+        }
+
+        .is-selected {
+
+          .p-icon--minus {
+            display: block;
+          }
+
+          .p-icon--plus {
+            display: none;
+          }
+        }
+
+        .is-selected +  {
+
+          .sidebar__second-level,
+          .sidebar__third-level {
+            display: block;
+          }
+        }
+      }
+
+      .is-deepest-level {
+        background-color: $color-light;
+      }
+    }
+
+    .p-icon--plus,
+    .p-icon--minus {
+      perspective: 800px;
+      perspective-origin: 50% 100px;
+      position: absolute;
+      right: $sp-medium;
+      top: $sp-small;
+      transition: all .5s ease-in-out; // sass-lint:disable-line no-transition-all
+    }
+  }
+}
+
+@mixin vf-navigation-pattern ($background-color, $border-color: $color-x-light, $text-color: $color-x-dark) {
+  @extend %clearfix;
+  background-color: $background-color;
+  border-bottom: 1px solid $border-color;
+  color: $text-color;
+  margin-top: 0;
+  position: relative;
+  width: 100%;
+
+  .row {
+    padding: 0;
+  }
+
+  @media (max-width: $breakpoint-navigation-threshold) {
+    height: auto;
+  }
+
+  .p-navigation {
+    &__banner {
+      @media (max-width: $breakpoint-navigation-threshold) {
+        overflow: hidden;
+        position: relative;
+      }
+    }
+
+    &__toggle--open,
+    &__toggle--close,
+    &__link {
+      color: $text-color;
+
+      &:hover {
+        border-bottom: 0;
+        text-decoration: underline;
+      }
+
+      &:visited {
+        color: $text-color;
+      }
+    }
+
+    &__toggle--close {
+      display: none;
+    }
+
+    &__toggle {
+
+      &--open,
+      &--close {
+        margin: 0;
+        position: absolute;
+        right: 1rem;
+        top: calc(50% - .75rem);
+
+        @media (min-width: $breakpoint-navigation-threshold + 1) {
+          display: none;
+        }
+      }
+    }
+
+    &__logo {
+      @include vf-heading-4;
+      align-items: center;
+      display: flex;
+      float: left;
+      margin: $sp-small $sp-x-small;
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        margin: $sp-x-small ($sp-large - $sp-xx-small);
+      }
+    }
+
+    &__image {
+      float: left;
+      height: $sp-x-large;
+    }
+
+    &__link {
+      border-bottom: 0; // For when this class is applied to an <a> directly
+      display: block;
+      margin-top: 0;
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        display: block;
+        float: left;
+        width: auto;
+      }
+
+      &,
+      & > a {
+        // For when this class is applied to something that contains <a>s, e.g.:
+        // <li class="p-navigation__link"><a></a></li>
+        border-bottom: 0;
+        display: block;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__links {
+      background-color: $color-mid-light;
+      clear: both;
+      margin: 0; // For if this class is applied to a <ul>
+      padding: 0; // For if this class is applied to a <ul>
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        background-color: transparent;
+        clear: none;
+        flex-shrink: 0;
+        float: left;
+      }
+
+      .p-navigation__link {
+        border-left: 1px solid $color-mid-light;
+
+        &:hover {
+          background-color: $color-light;
+        }
+
+        @media (max-width: $breakpoint-navigation-threshold) {
+          background-color: $color-x-light;
+          border-left: 0;
+          border-top: 1px solid $color-mid-light;
+          color: $color-dark;
+          text-align: left;
+        }
+
+        > a {
+          border-bottom: 3px solid transparent;
+        }
+
+        &.is-selected > a {
+          border-bottom-color: $color-mid-dark;
+        }
+      }
+
+      .p-navigation__link > a,
+      > a {
+        // For links nested in navigation list, e.g:
+        // <ul class="p-navigation__links">
+        //  <li class="p-navigation__link"><a></a></li>
+        // </ul>
+        //
+        // and for links nested directly in navigation, e.g:
+        // <div class="p-navigation__links">
+        //   <a class="class="p-navigation__link"></a>
+        // </div>
+
+        color: $color-dark;
+        font-size: .875rem;
+        padding: .8125rem $sp-x-small .625rem $sp-x-small;
+
+        @media (min-width: $breakpoint-navigation-threshold + 1) {
+          color: $text-color;
+          padding-left: ($sp-large - $sp-xx-small);
+          padding-right: ($sp-large - $sp-xx-small);
+        }
+      }
+
+      &:last-of-type {
+        border-right: 1px solid $color-mid-light;
+
+        @media (max-width: $breakpoint-navigation-threshold) {
+          border-bottom: 0;
+          border-right: 0;
+        }
+      }
+    }
+
+    &__nav {
+      display: none;
+      margin-top: 0;
+
+      @media (min-width: $breakpoint-navigation-threshold + 1) {
+        display: flex;
+      }
+
+      > .p-search-box {
+        align-self: center;
+        margin-left: auto;
+        margin-top: 0;
+        max-width: 20rem;
+        order: 1;
+        width: 100%;
+
+        @media (max-width: $breakpoint-navigation-threshold) {
+          max-width: inherit;
+          order: -1;
+          top: 0;
+        }
+
+        > .p-search-box__input,
+        .p-search-box__button,
+        .p-search-box__reset {
+          @media (max-width: $breakpoint-navigation-threshold) {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &:target {
+    .p-navigation__toggle--open {
+      display: none;
+    }
+
+    .p-navigation__toggle--close {
+      @media (max-width: $breakpoint-navigation-threshold) {
+        display: inline-block;
+      }
+    }
+
+    .p-navigation__nav {
+      display: flex;
+      flex-direction: row;
+
+      @media (max-width: $breakpoint-navigation-threshold) {
+        flex-direction: column;
+      }
+    }
+  }
+}

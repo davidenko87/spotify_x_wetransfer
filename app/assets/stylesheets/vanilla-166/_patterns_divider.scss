@@ -1,0 +1,40 @@
+@import 'settings';
+
+@mixin vf-p-divider {
+
+  .p-divider {
+
+    @media (min-width: $breakpoint-medium) {
+      display: flex;
+    }
+
+    &__block {
+      border-bottom: 1px solid $color-mid-light;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      @media (max-width: $breakpoint-medium) {
+        padding-bottom: $sp-large;
+      }
+
+      @media (min-width: $breakpoint-medium) {
+        border-bottom: 0;
+        padding-right: 1rem;
+
+        &:not(:nth-child(1))::before {
+          border-left: 1px solid $color-mid-light;
+          content: '';
+          height: 100%;
+          left: -1rem;
+          position: absolute;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}

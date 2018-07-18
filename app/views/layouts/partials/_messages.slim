@@ -1,0 +1,21 @@
+- if alert.present?
+  .p-notification--negative.mb
+    p.p-notification__response
+      span.p-notification__status
+        = 'Error:'
+      - if alert.is_a? Array
+        - alert.each do |msg|
+          = msg
+      -else
+        = alert
+
+- if notice.present?
+  .p-notification--positive.mb
+    p.p-notification__response
+      span.p-notification__status
+        = 'Success:'
+      - if notice.is_a? Array
+        - notice.each do |msg|
+          = msg
+      -else
+        = notice

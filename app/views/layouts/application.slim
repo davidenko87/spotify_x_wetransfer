@@ -4,21 +4,16 @@ html
     = csrf_meta_tags
     = csp_meta_tag
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    meta name="viewport" content="initial-scale=1, maximum-scale=1 user-scalable=yes width=device-width"
   body
-    = render partial: 'layouts/partials/menu'
-    .mt-18
-      .notifications
-        - if notice
-          .info-box
-            .info-box-content
-              = notice
-        - if alert
-          .info-box
-            .info-box-content
-              = alert
-      .container-fluid
-        .row.flex-xl-nowrap
-          main.cell
-            = yield
+    = render 'layouts/partials/menu'
+    .row.mt style="max-width: 100%"
+      .col-12
+        = render 'layouts/partials/messages'
+        = yield
+      .main-content
+        .content

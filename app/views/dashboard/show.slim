@@ -1,25 +1,33 @@
-.grid
-  .row
-    .cell
-      h2
-        = "Hello "
-        small
-          = @user_info['id']
-    .cell
-      .place-right.mt-2
-        = link_to 'Share playlist', share_playlist_path, method: 'post', class: 'button primary outline'
-  .row
-    .cell
-      h6 = 'This are all your playlists saved on your account:'
-  .row.mt-8
-    = simple_form_for :playlist_ids, url: share_selected_playlist_path, method: 'post' do |f|
-      -  @user_playlists.each_with_index do |pl, index|
-        = f.simple_fields_for :ids do |sff|
-          = sff.input_field index, as: :boolean, checked_value: pl['id'], unchecked_value: nil
-          = sff.label :id do
-            . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
-              span.branding-bar = pl['name']
-              span.badge-top = pl['tracks']['total']
+.row.mt
+  .col-6
+    h2
+      = "Hello #{@user_info['id']}"
+  .col-6
+    .u-align--right
+      = link_to 'Share all playlist', share_playlist_path, method: 'post', class: 'p-button--brand'
+.row
+  .col-12
+    h4 = 'This are all your playlists saved on your account:'
+    p = 'Select the playlist you want to share via WeTransfer'
 
-      = f.submit
+= simple_form_for :playlist_ids, url: share_selected_playlist_path, method: 'post' do |f|
+  - @user_playlists.in_groups_of(6, false) do |group|
+    .row
+      .u-equal-height
+        -  group.each_with_index do |pl, index|
+          .p-card.col-2
+            = f.simple_fields_for :ids do |sff|
+              = sff.input_field pl['id'], as: :boolean, checked_value: pl['id'], unchecked_value: nil
+              p = 'check to share'
+              hr.u-sv1
+              = sff.label pl['id'] do
+                = image_tag(pl['images'].first['url'], class: 'p-card__thumbnail')
+                h6.p-card__title
+                  = truncate( "Playlist: #{pl['name']}", length: 30)
+                p.p-card__content
+                  = "Tracks in playlist: #{pl['tracks']['total']}"
+              hr.u-sv1
+              = link_to 'more_info', dashboard_playlist_tracks_path(id: pl['id']), class: 'p-button--neutral'
+
+  = f.submit 'Share selected playlists'
 

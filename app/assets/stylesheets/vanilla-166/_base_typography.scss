@@ -1,0 +1,379 @@
+@import 'settings';
+
+// Typographic element styles
+@mixin vf-b-typography {
+
+  @if str-index($font-base-family, 'Ubuntu') {
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 300;
+      src: url('#{$assets-path}e8c07df6-Ubuntu-L_W.woff2') format('woff2'), url('#{$assets-path}8619add2-Ubuntu-L_W.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      src: url('#{$assets-path}fff37993-Ubuntu-R_W.woff2') format('woff2'), url('#{$assets-path}7af50859-Ubuntu-R_W.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: italic;
+      font-weight: 300;
+      src: url('#{$assets-path}f8097dea-Ubuntu-LI_W.woff2') format('woff2'), url('#{$assets-path}8be89d02-Ubuntu-LI_W.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: italic;
+      font-weight: 400;
+      src: url('#{$assets-path}fca66073-ubuntu-ri-webfont.woff2') format('woff2'), url('#{$assets-path}f0898c72-ubuntu-ri-webfont.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 100;
+      src: url('#{$assets-path}7f100985-Ubuntu-Th_W.woff2') format('woff2'), url('#{$assets-path}502cc3a1-Ubuntu-Th_W.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu Mono';
+      font-style: normal;
+      font-weight: 300;
+      src: url('#{$assets-path}fdd692b9-UbuntuMono-R_W.woff2') format('woff2'), url('#{$assets-path}85edb898-UbuntuMono-R_W.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Ubuntu Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: url('#{$assets-path}fdd692b9-UbuntuMono-R_W.woff2') format('woff2'), url('#{$assets-path}85edb898-UbuntuMono-R_W.woff') format('woff');
+    }
+
+    @if $font-allow-cyrillic-greek-latin {
+      // cyrillic-ext
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}ODszJI8YqNw8V2xPulzjO_esZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+        unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+      }
+
+      // cyrillic
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}iQ9VJx1UMASKNiGywyyCXvesZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+
+      // greek-ext
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}WkvQmvwsfw_KKeau9SlQ2_esZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+        unicode-range: U+1F00-1FFF;
+      }
+
+      // greek
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}gYAtqXUikkQjyJA1SnpDLvesZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+        unicode-range: U+0370-03FF;
+      }
+
+      // latin-ext
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}Wu5Iuha-XnKDBvqRwQzAG_esZW2xOQ-xsNqO47m55DA.woff2') format('woff2');
+        unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+      }
+
+      // latin
+      @font-face {
+        font-family: 'Ubuntu';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Ubuntu'), url('#{$font-import}sDGTilo5QRsfWu6Yc11AXg.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+      }
+    }
+  }
+
+  * {
+    // sass-lint:disable no-vendor-prefixes
+    // These vendor prefixes are unique and cannot be added by autoprefixer
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    // sass-lint:enable no-vendor-prefixes
+    // sass-lint:disable no-misspelled-properties
+    font-smoothing: subpixel-antialiased;
+    // sass-lint:enable no-misspelled-properties
+  }
+
+  html {
+    font-size: $font-base-size;
+  }
+
+  body {
+    color: $color-dark;
+    font-family: unquote($font-base-family);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+
+  /// Base typography
+  /// @section type
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  [class^="p-heading--"] {
+    font-family: unquote($font-heading-family);
+    margin: 0;
+  }
+
+  h1 {
+    + * {
+      margin-top: $sp-medium;
+
+      @media screen and (min-width: #{$breakpoint-large}) {
+        margin-top: $sp-large;
+      }
+    }
+  }
+
+
+  h5,
+  h6 {
+    + * {
+      margin-top: $sp-x-small;
+
+      @media screen and (min-width: #{$breakpoint-large}) {
+        margin-top: $sp-small;
+      }
+    }
+  }
+
+  p {
+    @include p-max-width;
+    @include align-text;
+    margin-bottom: 0;
+  }
+
+  p {
+    + p {
+      margin-top: $sp-medium;
+
+      @media screen and (min-width: #{$breakpoint-large}) {
+        margin-top: $sp-large;
+      }
+    }
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-family: unquote($font-base-family);
+  }
+
+  // headings
+  h1 {
+    @include vf-heading-1;
+  }
+
+  h2 {
+    @include vf-heading-2;
+  }
+
+  h3 {
+    @include vf-heading-3;
+  }
+
+  h4 {
+    @include vf-heading-4;
+  }
+
+  h5 {
+    @include vf-heading-5;
+  }
+
+  h6 {
+    @include vf-heading-6;
+  }
+
+  li {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+
+  li > ul,
+  li > ol {
+    padding-top: 0;
+  }
+
+  li > ul > li:last-of-type,
+  li > ol > li:last-of-type {
+    padding-bottom: 0;
+  }
+
+  // blockquotes
+  blockquote {
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: $sp-large;
+
+    > p {
+      font-size: $sp-medium;
+      font-style: italic;
+      margin-top: $sp-small;
+    }
+
+    > cite {
+      font-size: $sp-medium;
+      font-style: normal;
+      margin-top: $sp-small;
+    }
+  }
+
+  // misc
+  strong {
+    font-weight: 400;
+  }
+
+  small {
+    font-size: .875rem;
+  }
+
+  sub,
+  sup {
+    font-size: .75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+}
+
+// Optimal max-width for main headings (up to 2 lines of copy)
+@mixin heading-max-width--short {
+  max-width: 20em;
+}
+
+// Optimal max-width for headings (up to 3 lines of copy)
+@mixin heading-max-width--long {
+  max-width: 25em;
+}
+
+// Optimal max-width for body copy
+@mixin p-max-width {
+  max-width: 35em;
+}
+
+// Relaxed max-width for cases like notifications, where minimizing vertical height is
+// more important than maintaining the optimal max-width of 35em
+@mixin p-max-width--long {
+  max-width: 60em;
+}
+
+@mixin align-text {
+  .u-align--center & {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .u-align--left & {
+    margin-right: auto;
+  }
+
+  .u-align--right & {
+    margin-left: auto;
+  }
+}
+
+@mixin vf-heading-1 {
+  @include heading-max-width--short;
+  @include align-text;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.3125;
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 3rem;
+    line-height: 1.25;
+  }
+}
+
+@mixin vf-heading-2 {
+  @include heading-max-width--short;
+  @include align-text;
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 1.2857;
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 2.25rem;
+    line-height: 1.333;
+  }
+}
+
+@mixin vf-heading-3 {
+  @include heading-max-width--long;
+  @include align-text;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.333;
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 1.75rem;
+    line-height: 1.287;
+  }
+}
+
+@mixin vf-heading-4 {
+  @include heading-max-width--long;
+  @include align-text;
+  font-size: 1.375rem;
+  font-weight: 300;
+  line-height: 1.2727;
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 1.5rem;
+    line-height: 1.333;
+  }
+}
+
+@mixin vf-heading-5 {
+  @include p-max-width;
+  @include align-text;
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.333;
+
+  @media only screen and (min-width: $breakpoint-large) {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+@mixin vf-heading-6 {
+  @include p-max-width;
+  @include align-text;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}

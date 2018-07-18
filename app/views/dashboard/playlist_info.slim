@@ -1,2 +1,13 @@
 h1 = 'playlist info'
-- binding.pry
+table
+  thead
+    tr
+      th
+      th
+      th
+  tbody
+    - @playlist['items'].each do |item|
+      tr
+        td = item['track']['artists'][0]['name']
+        td = item['track']['name']
+        td = link_to 'spotify_link', item['track']['external_urls']['spotify'], class: 'p-button--base'

@@ -1,9 +1,27 @@
-nav#app-bar.fg-white.app-bar-expand-md.bg-dark data-role='appbar'
-  = link_to '#', class: 'brand no-hover' do
-    = 'WeTransfer x Spotify'
-  ul.app-bar-menu.ml-auto
-    - if current_user
-      li = link_to 'Dashboard', dashboard_path
-      li = link_to 'Sign out', destroy_user_session_path, method: :delete
-    - else
-      li = link_to 'Login with spotify', user_spotify_omniauth_authorize_path('show_dialog': true)
+header#navigation.p-navigation
+  .p-navigation__banner
+    .p-navigation__logo
+      = link_to 'WeTransfer X Spotify', root_path, class: 'p-navigation__link'
+
+    a.p-navigation__toggle--open href='#navigation' title='menu'
+     = 'Menu'
+    a.p-navigation__toggle--close href='#navigation-closed' title='menu'
+     = 'Close Menu'
+
+  nav.p-navigation__nav role='menubar'
+    span.u-off-screen
+      a href='#main-content'
+        = 'Jump to main content'
+
+    - if user_signed_in?
+      ul.p-navigation__links role='menu'
+        li.p-navigation__link class=(current_page?('/dashboard') ? 'is-selected' : '') role='menuitem'
+          = link_to 'Dashboard', dashboard_path
+
+      ul.p-navigation__links.u-align--right role='menu'
+        li.p-navigation__link role='menuitem'
+          = link_to 'Sign out', destroy_user_session_path, method: :delete
+    -else
+      ul.p-navigation__links.u-align--right role='menu'
+        li.p-navigation__link role='menuitem'
+          = link_to 'Login with spotify', user_spotify_omniauth_authorize_path('show_dialog': true)
