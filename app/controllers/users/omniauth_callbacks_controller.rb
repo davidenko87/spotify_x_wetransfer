@@ -19,11 +19,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def set_user
     @user = User.from_omniauth(request.env['omniauth.auth'])
   end
-
-  # def deny_access_for_deleted_user
-  #   if @user.is_deleted?
-  #     flash[:alert] = 'You are blocked from using the WeTransfer API, please contact developers@wetransfer.com'
-  #     redirect_back_or_default
-  #   end
-  # end
 end
