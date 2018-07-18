@@ -21,4 +21,4 @@ test:
   database: wespotify_test
 
 production:
-  url: url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
