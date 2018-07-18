@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_07_04_094257) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -21,8 +24,9 @@ ActiveRecord::Schema.define(version: 2018_07_04_094257) do
     t.string "refresh_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index [nil], name: "index_users_on_token", unique: true
+    t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
   end
 
 end
