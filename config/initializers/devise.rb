@@ -260,10 +260,9 @@ Devise.setup do |config|
                             ENV['SPOTIFY_CLIENT_SECRET'],
                             scope: %w(
                               user-read-email
+                              playlist-read-private
                               playlist-read-collaborative
-                              user-read-recently-played
                               user-top-read
-                              playlist-modify-public
                             ).join(' ')
 
   # ==> Warden configuration
