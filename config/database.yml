@@ -21,5 +21,4 @@ test:
   database: wespotify_test
 
 production:
-  <<: *default
-  database: wespotify_prod
+  url: url: <%= ENV['DATABASE_URL'] %>
