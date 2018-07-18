@@ -6,8 +6,9 @@ When you login, you will have a overview of all the playlist you saved. Next to 
 
 ### Instalation
 
-Request a WeTransfer API key: [developers.wetransfer.com](developers.wetransfer.com)
-Register a Spotify APP: [developer.spotify.com](developer.spotify.com) and make sure you whitelist the callback url from the authentication e.q.: `http://localhost:3000/auth/spotify/callback`
+- Register a WeTransfer API key: [developers.wetransfer.com](developers.wetransfer.com)
+
+- Register a Spotify APP: [developer.spotify.com](developer.spotify.com) and make sure you whitelist the callback url from the authentication e.q.: `http://localhost:3000/auth/spotify/callback`
 
 Put those into the .env file file (I provided a .example.env)
 
