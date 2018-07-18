@@ -6,4 +6,4 @@ nav#app-bar.fg-white.app-bar-expand-md.bg-dark data-role='appbar'
       li = link_to 'Dashboard', dashboard_path
       li = link_to 'Sign out', destroy_user_session_path, method: :delete
     - else
-      li = link_to 'Login with spotify', user_spotify_omniauth_authorize_path
+      li = link_to 'Login with spotify', user_spotify_omniauth_authorize_path('show_dialog': true)
