@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
     get '/dashboard/playlist_tracks', to: 'dashboard#playlist_info'
     post '/share_playlist', to: 'dashboard#export_to_transfer'
+    post '/share_selected_playlist', to: 'dashboard#export_selected'
   end
 
   root 'page#home'
