@@ -17,6 +17,8 @@ header#navigation.p-navigation
       ul.p-navigation__links role='menu'
         li.p-navigation__link class=(current_page?('/dashboard') ? 'is-selected' : '') role='menuitem'
           = link_to 'Dashboard', dashboard_path
+        li.p-navigation__link class=(current_page?('/dashboard/top_tracks') ? 'is-selected' : '') role='menuitem'
+          = link_to 'Top Tracks', dashboard_top_tracks_path
 
       ul.p-navigation__links.u-align--right role='menu'
         li.p-navigation__link role='menuitem'

@@ -4,11 +4,14 @@
       = "Hello #{@user_info['id']}"
   .col-6
     .u-align--right
-      = link_to 'Share all playlist', share_playlist_path, method: 'post', class: 'p-button--brand'
+      = link_to 'Share all playlists', share_playlist_path, method: 'post', class: 'p-button--brand'
 .row
   .col-12
     h4 = 'This are all your playlists saved on your account:'
-    p = 'Select the playlist you want to share via WeTransfer'
+    p
+      | Select the playlist you want to share via WeTransfer
+        You can also select tracks from a certain playlist to share, just click the 'view tracks' button to view all the tracks inside that playlist
+
 
 = simple_form_for :playlist_ids, url: share_selected_playlist_path, method: 'post' do |f|
   - @user_playlists.in_groups_of(6, false) do |group|
@@ -27,7 +30,7 @@
                 p.p-card__content
                   = "Tracks in playlist: #{pl['tracks']['total']}"
               hr.u-sv1
-              = link_to 'more_info', dashboard_playlist_tracks_path(id: pl['id']), class: 'p-button--neutral'
+              = link_to 'View Tracks', dashboard_playlist_tracks_path(id: pl['id']), class: 'p-button--neutral'
 
   = f.submit 'Share selected playlists'
 

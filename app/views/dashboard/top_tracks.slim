@@ -1,0 +1,28 @@
+.row
+  .col-12
+    h1 = 'Top Tracks'
+    p
+      | Here is your top 20 tracks you have listed to on Spotify.
+        Select the tracks you want to share
+
+table
+  thead
+    tr
+      th
+      th
+      th
+      th
+      th
+      th
+  tbody
+    = simple_form_for :track_ids, url: share_selected_tracks_path, method: 'post' do |f|
+      = f.simple_fields_for :ids do |sff|
+        - @list['items'].each do |item|
+          tr
+            td = sff.input_field item['id'], as: :boolean, checked_value: item['id'], unchecked_value: nil, label: false
+            td = image_tag(item['album']['images'].last['url'])
+            td
+            td = item['artists'][0]['name']
+            td = item['name']
+            td = link_to 'listen', item['external_urls']['spotify'], class: 'p-button--base'
+      = f.submit 'share selected track', class: 'mt'

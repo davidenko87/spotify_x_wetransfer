@@ -1,13 +1,24 @@
-h1 = 'playlist info'
+h1 = 'Playlist info'
+p
+  | This are all the tracks inside that playlist. Select the tracks you want to share
 table
   thead
     tr
       th
       th
       th
+      th
+      th
+      th
   tbody
-    - @playlist['items'].each do |item|
-      tr
-        td = item['track']['artists'][0]['name']
-        td = item['track']['name']
-        td = link_to 'spotify_link', item['track']['external_urls']['spotify'], class: 'p-button--base'
+    = simple_form_for :track_ids, url: share_selected_tracks_path, method: 'post' do |f|
+      = f.simple_fields_for :ids do |sff|
+        - @playlist['items'].each do |item|
+          tr
+            td = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil, label: false
+            td = image_tag(item['track']['album']['images'].last['url'])
+            td
+            td = item['track']['artists'][0]['name']
+            td = item['track']['name']
+            td = link_to 'listen', item['track']['external_urls']['spotify'], class: 'p-button--base'
+      = f.submit 'share selected track'

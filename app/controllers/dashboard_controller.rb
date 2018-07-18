@@ -10,6 +10,10 @@ class DashboardController < ApplicationController
     @playlist = SpotifyConnection.new(current_user).playlists_tracks(params[:id])
   end
 
+  def top_tracks
+    @list = SpotifyConnection.new(current_user).top_tracks
+  end
+
   def export_to_transfer
     @user_playlists = SpotifyConnection.new(current_user).user_playlists
     items_to_export = []
@@ -24,7 +28,7 @@ class DashboardController < ApplicationController
     redirect_to dashboard_path, notice: "Your playlist is uploaded here: #{url}"
   end
 
-  def export_selected
+  def export_selected_playlists
     playlist_ids = selected_playlists_params['ids'].values
     items_to_export = []
     playlist_ids.each do |pl_id|
@@ -37,6 +41,21 @@ class DashboardController < ApplicationController
     end
     url = TransferExporter.new(items_to_export).create_transfer
     redirect_to dashboard_path, notice: "Your playlist is uploaded here: #{url}"
+  end
+
+   def export_selected_tracks
+    track_ids = selected_tracks_params['ids'].values
+    items_to_export = []
+    track_ids.each do |pl_id|
+      item = {}
+      resp = SpotifyConnection.new(current_user).track_info(pl_id)
+      item[:link] = resp['external_urls']['spotify']
+      item[:image] = image_to_tempfile(resp['album']['images'].first['url'], resp['name'])
+      item[:title] = "Track: #{resp['name']}"
+      items_to_export << item
+    end
+    url = TransferExporter.new(items_to_export).create_transfer
+    redirect_to dashboard_path, notice: "The selected tracks are uploaded here: #{url}"
   end
 
   private
@@ -54,5 +73,9 @@ class DashboardController < ApplicationController
 
   def selected_playlists_params
     params.require(:playlist_ids).permit(ids:{})
+  end
+
+  def selected_tracks_params
+    params.require(:track_ids).permit(ids:{})
   end
 end

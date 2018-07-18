@@ -32,6 +32,14 @@ class SpotifyConnection
     connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists/#{playlist_id}")
   end
 
+  def track_info(track_id)
+    connection("https://api.spotify.com/v1/tracks/#{track_id}")
+  end
+
+  def top_tracks
+    connection("https://api.spotify.com/v1/me/top/tracks")
+  end
+
   def connection(url)
     response = Faraday.get(url) do |con|
       con.headers['Authorization'] = 'Bearer ' + @user.access_token
