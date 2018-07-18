@@ -1,4 +1,4 @@
-class SpotifyCollector
+class SpotifyConnection
   BASE_URI = 'https://api.spotify.com/v1'.freeze
 
   def initialize(user)
@@ -26,6 +26,10 @@ class SpotifyCollector
 
   def playlists_tracks(playlist_id)
     connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists/#{playlist_id}/tracks")
+  end
+
+  def playlist_info(playlist_id)
+    connection("https://api.spotify.com/v1/users/#{@user.uid}/playlists/#{playlist_id}")
   end
 
   def connection(url)
