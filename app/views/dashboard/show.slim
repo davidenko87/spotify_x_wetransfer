@@ -12,10 +12,14 @@
     .cell
       h6 = 'This are all your playlists saved on your account:'
   .row.mt-8
-    -  @user_playlists.each do |pl|
-      = link_to dashboard_playlist_tracks_path(id: pl['id']) do
-        . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
-          span.branding-bar = pl['name']
-          span.badge-top = pl['tracks']['total']
+    = simple_form_for :playlist_ids, url: share_selected_playlist_path, method: 'post' do |f|
+      -  @user_playlists.each_with_index do |pl, index|
+        = f.simple_fields_for :ids do |sff|
+          = sff.input_field index, as: :boolean, checked_value: pl['id'], unchecked_value: nil
+          = sff.label :id do
+            . *{'data-role': 'tile', 'data-cover': pl['images'].first['url'], 'data-size': 'medium'}
+              span.branding-bar = pl['name']
+              span.badge-top = pl['tracks']['total']
 
-/ pl['external_urls']['spotify']
+      = f.submit
+
