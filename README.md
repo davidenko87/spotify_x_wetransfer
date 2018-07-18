@@ -2,7 +2,7 @@
 
 Using this will help you sharing your playlist with friends through WeTransfer.
 
-When you login, you will have a overview of all the playlist on your account. Next to the overview you'll have the posibility to share all your playlist via a WeTransfer link.
+When you login, you will have a overview of all the playlist you saved. Next to the overview you'll have the posibility to share all your playlist, selected playlists and tracks via a WeTransfer link.
 
 ### Instalation
 
@@ -15,4 +15,6 @@ To install all dependencies run `bundle install`
 
 Then run `rails db:create` for creating the database
 
-And run `rails server` to test.
+And run `rails server` to run the application.
+
+click here to see it running: [https://wetransfer-spotify.herokuapp.com/](wetransfer-spotify.herokuapp.com/)
