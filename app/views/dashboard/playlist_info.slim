@@ -16,7 +16,11 @@ table
         - @playlist['items'].each do |item|
           tr
             td = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil, label: false
-            td = image_tag(item['track']['album']['images'].last['url'])
+            td
+              - if item['track']['album']['images'].any?
+                = image_tag(item['track']['album']['images'].last['url'])
+              - else
+                = image_tag('http://via.placeholder.com/350x150'.last['url'])
             td
             td = item['track']['artists'][0]['name']
             td = item['track']['name']
