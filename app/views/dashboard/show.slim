@@ -24,7 +24,10 @@
               p = 'check to share'
               hr.u-sv1
               = sff.label pl['id'] do
-                = image_tag(pl['images'].first['url'], class: 'p-card__thumbnail')
+                - if pl['images'].any?
+                  = image_tag(pl['images'].first['url'], class: 'p-card__thumbnail')
+                - else
+                  = image_tag('http://via.placeholder.com/350x150', class: 'p-card__thumbnail')
                 h6.p-card__title
                   = truncate( "Playlist: #{pl['name']}", length: 30)
                 p.p-card__content
