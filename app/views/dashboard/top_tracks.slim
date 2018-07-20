@@ -25,7 +25,11 @@
                 td = image_tag(item['album']['images'].last['url'])
                 td = item['artists'][0]['name']
                 td = item['name']
-                td = link_to 'listen', item['external_urls']['spotify'], class: 'p-button--base', target: '_blank'
+                td
+                  = link_to item['external_urls']['spotify'], class: 'p-button--neutral', target: '_blank' do
+                    i.material-icons
+                      = 'play_arrow'
+                    = 'listen'
           = f.submit 'share selected track', class: 'mt share_button'
 
 = render '/layouts/partials/loader_screen'

@@ -56,7 +56,7 @@ class DashboardController < ApplicationController
       item = {}
       resp = SpotifyConnection.new(current_user).track_info(pl_id)
       item[:link] = resp['external_urls']['spotify']
-      if resp['images'].any?
+      if resp['album']['images'].any?
         item[:image] = image_to_tempfile(resp['album']['images'].first['url'], "#{resp['artists'][0]['name']} - #{resp['name']}")
       end
       item[:title] = "Track: #{resp['artists'][0]['name']} - #{resp['name']}"
