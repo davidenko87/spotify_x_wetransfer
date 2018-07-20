@@ -1,0 +1,22 @@
+.loader_screen{
+  position: absolute;
+  height: 50rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  top: 5rem;
+  display: block;
+  min-width: 100rem;
+  padding-left: 18%;
+  visibility: hidden;
+
+  .load_text{
+    max-width: 100rem!important;
+    margin-top: 1rem;
+  }
+  .load_icon{
+    font-size: 100px;
+    float: left;
+  }
+}
+.visible{
+  visibility: visible!important;
+}

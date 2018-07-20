@@ -26,4 +26,8 @@
                 td = item['artists'][0]['name']
                 td = item['name']
                 td = link_to 'listen', item['external_urls']['spotify'], class: 'p-button--base', target: '_blank'
-          = f.submit 'share selected track', class: 'mt'
+          = f.submit 'share selected track', class: 'mt share_button'
+
+= render '/layouts/partials/loader_screen'
+= content_for :scripts do
+  = javascript_include_tag 'components/loader_screen'

@@ -4,7 +4,7 @@
       = "Hello #{@user_info['id']}"
   .col-6
     .u-align--right
-      = link_to 'Share all playlists', share_playlist_path, method: 'post', class: 'p-button--brand'
+      = link_to 'Share all playlists', share_playlist_path, method: 'post', class: 'p-button--brand share_button'
 .row
   .col-12
     h4 = 'This are all your playlists saved on your account:'
@@ -34,7 +34,9 @@
                   = "Tracks in playlist: #{pl['tracks']['total']}"
               = link_to 'View Tracks', dashboard_playlist_tracks_path(id: pl['id']), class: 'card_buttons'
 
-  = f.submit 'Share selected playlists'
+  = f.submit 'Share selected playlists', class: 'share_button'
 
+= render '/layouts/partials/loader_screen'
 = content_for :scripts do
   = javascript_include_tag 'components/playlist_select'
+  = javascript_include_tag 'components/loader_screen'

@@ -15,7 +15,9 @@ table
       = f.simple_fields_for :ids do |sff|
         - @playlist['items'].each do |item|
           tr
-            td = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil, label: false
+            td
+              = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil
+              = sff.label 'check to share', for: "track_ids_ids_" + item['track']['id'], required: false
             td
               - if item['track']['album']['images'].any?
                 = image_tag(item['track']['album']['images'].last['url'])
@@ -25,4 +27,8 @@ table
             td = item['track']['artists'][0]['name']
             td = item['track']['name']
             td = link_to 'listen', item['track']['external_urls']['spotify'], class: 'p-button--base', target: '_blank'
-      = f.submit 'share selected track'
+      = f.submit 'share selected track', class: 'share_button'
+
+= render 'partials/loader_screen'
+= content_for :scripts do
+  = javascript_include_tag 'components/loader_screen'

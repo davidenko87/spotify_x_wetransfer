@@ -20,7 +20,9 @@ class DashboardController < ApplicationController
     @user_playlists.each do |pl|
       item = {}
       item[:link] = pl['external_urls']['spotify']
-      item[:image] = image_to_tempfile(pl['images'].first['url'], pl['name'])
+      if pl['images'].any?
+        item[:image] = image_to_tempfile(pl['images'].first['url'], pl['name'])
+      end
       item[:title] = "Playlist: #{pl['name']}"
       items_to_export << item
     end
@@ -35,27 +37,35 @@ class DashboardController < ApplicationController
       item = {}
       resp = SpotifyConnection.new(current_user).playlist_info(pl_id)
       item[:link] = resp['external_urls']['spotify']
-      item[:image] = image_to_tempfile(resp['images'].first['url'], resp['name'])
+      if resp['images'].any?
+        item[:image] = image_to_tempfile(resp['images'].first['url'], resp['name'])
+      end
       item[:title] = "Playlist: #{resp['name']}"
       items_to_export << item
     end
     url = TransferExporter.new(items_to_export).create_transfer
     redirect_to dashboard_path, notice: "Your playlist is uploaded here: #{url}"
+  rescue
+    redirect_to dashboard_path, alert: "Nothing selected"  and return
   end
 
-   def export_selected_tracks
+  def export_selected_tracks
     track_ids = selected_tracks_params['ids'].values
     items_to_export = []
     track_ids.each do |pl_id|
       item = {}
       resp = SpotifyConnection.new(current_user).track_info(pl_id)
       item[:link] = resp['external_urls']['spotify']
-      item[:image] = image_to_tempfile(resp['album']['images'].first['url'], "#{resp['artists'][0]['name']} - #{resp['name']}")
+      if resp['images'].any?
+        item[:image] = image_to_tempfile(resp['album']['images'].first['url'], "#{resp['artists'][0]['name']} - #{resp['name']}")
+      end
       item[:title] = "Track: #{resp['artists'][0]['name']} - #{resp['name']}"
       items_to_export << item
     end
     url = TransferExporter.new(items_to_export).create_transfer
     redirect_to dashboard_path, notice: "The selected tracks are uploaded here: #{url}"
+  rescue
+    redirect_to dashboard_path, alert: "Nothing selected"  and return
   end
 
   private
