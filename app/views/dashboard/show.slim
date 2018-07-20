@@ -34,7 +34,7 @@
                   = "Tracks in playlist: #{pl['tracks']['total']}"
               = link_to 'View Tracks', dashboard_playlist_tracks_path(id: pl['id']), class: 'card_buttons'
 
-  = f.submit 'Share selected playlists', class: 'share_button'
+  = f.submit 'Share selected playlists', class: 'p-button--brand share_button'
 
 = render '/layouts/partials/loader_screen'
 = content_for :scripts do
