@@ -1,19 +1,21 @@
 html
   head
-    title SpotifyCollections
+    title SpotiTransfer
     = csrf_meta_tags
     = csp_meta_tag
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application'
 
     meta name="viewport" content="initial-scale=1, maximum-scale=1 user-scalable=yes width=device-width"
   body
     = render 'layouts/partials/menu'
-    .row.mt style="max-width: 100%"
-      .col-12
-        = render 'layouts/partials/messages'
-        = yield
-      .main-content
-        .content
+    .content
+      .row.mt style="max-width: 100%"
+        .col-12
+          = render 'layouts/partials/messages'
+          = yield
+        .main-content
+          .content
+    = yield(:scripts) if content_for?(:scripts)

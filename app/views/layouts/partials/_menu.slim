@@ -1,7 +1,8 @@
 header#navigation.p-navigation
   .p-navigation__banner
     .p-navigation__logo
-      = link_to 'WeTransfer X Spotify', root_path, class: 'p-navigation__link'
+      = link_to root_path, class: 'p-navigation__link' do
+        = 'SpotiTransfer'
 
     a.p-navigation__toggle--open href='#navigation' title='menu'
      = 'Menu'
@@ -20,10 +21,10 @@ header#navigation.p-navigation
         li.p-navigation__link class=(current_page?('/dashboard/top_tracks') ? 'is-selected' : '') role='menuitem'
           = link_to 'Top Tracks', dashboard_top_tracks_path
 
-      ul.p-navigation__links.u-align--right role='menu'
+      ul.p-navigation__links.u-align-text--right role='menu'
         li.p-navigation__link role='menuitem'
           = link_to 'Sign out', destroy_user_session_path
     -else
-      ul.p-navigation__links.u-align--right role='menu'
-        li.p-navigation__link role='menuitem'
-          = link_to 'Login with spotify', user_spotify_omniauth_authorize_path('show_dialog': true)
+      ul.p-navigation__links.u-align-text--right role='menu'
+          li.p-navigation__link role='menuitem'
+            = link_to 'Login with spotify', user_spotify_omniauth_authorize_path('show_dialog': true)

@@ -21,7 +21,7 @@
           .p-card.col-2
             = f.simple_fields_for :ids do |sff|
               = sff.input_field pl['id'], as: :boolean, checked_value: pl['id'], unchecked_value: nil
-              p = 'check to share'
+              = sff.label 'check to share', for: "playlist_ids_ids_" + pl['id'], required: false
               hr.u-sv1
               = sff.label pl['id'] do
                 - if pl['images'].any?
@@ -32,8 +32,9 @@
                   = truncate( "Playlist: #{pl['name']}", length: 30)
                 p.p-card__content
                   = "Tracks in playlist: #{pl['tracks']['total']}"
-              hr.u-sv1
-              = link_to 'View Tracks', dashboard_playlist_tracks_path(id: pl['id']), class: 'p-button--neutral'
+              = link_to 'View Tracks', dashboard_playlist_tracks_path(id: pl['id']), class: 'card_buttons'
 
   = f.submit 'Share selected playlists'
 
+= content_for :scripts do
+  = javascript_include_tag 'components/playlist_select'

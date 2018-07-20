@@ -1,9 +1,0 @@
-@import 'settings';
-
-@mixin vf-p-form-help-text {
-  .p-form-help-text {
-    color: $color-mid-dark;
-    font-size: .875rem;
-    margin-top: $sp-x-small;
-  }
-}

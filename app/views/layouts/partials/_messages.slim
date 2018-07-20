@@ -14,6 +14,7 @@
     p.p-notification__response
       span.p-notification__status
         = 'Success:'
+
       - if notice.is_a? Array
         - notice.each do |msg|
           = msg
