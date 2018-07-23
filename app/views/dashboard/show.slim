@@ -14,6 +14,7 @@
 
 
 = simple_form_for :playlist_ids, url: share_selected_playlist_path, method: 'post' do |f|
+  = f.submit 'Share selected playlists', class: 'p-button--brand share_button'
   - @user_playlists.in_groups_of(6, false) do |group|
     .row
       .u-equal-height

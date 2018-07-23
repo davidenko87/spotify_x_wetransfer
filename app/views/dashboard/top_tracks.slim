@@ -6,17 +6,18 @@
         Select the tracks you want to share
 .row
   .col-12
-    table
-      thead
-        tr
-          th
-          th
-          th
-          th
-          th
-      tbody
-        = simple_form_for :track_ids, url: share_selected_tracks_path, method: 'post' do |f|
+    = simple_form_for :track_ids, url: share_selected_tracks_path, method: 'post' do |f|
+      table
+        thead
+          tr
+            th
+            th
+            th
+            th
+            th
+        tbody
           = f.simple_fields_for :ids do |sff|
+            = f.submit 'share selected track', class: 'share_button p-button--brand '
             - @list['items'].each do |item|
               tr
                 td
@@ -30,7 +31,8 @@
                     i.material-icons
                       = 'play_arrow'
                     = 'listen'
-          = f.submit 'share selected track', class: 'mt share_button p-button--brand '
+
+      = f.submit 'share selected track', class: 'mt share_button p-button--brand '
 
 = render '/layouts/partials/loader_screen'
 = content_for :scripts do

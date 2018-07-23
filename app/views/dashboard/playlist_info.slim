@@ -1,36 +1,42 @@
-h1 = 'Playlist info'
-p
-  | This are all the tracks inside that playlist. Select the tracks you want to share
-table
-  thead
-    tr
-      th
-      th
-      th
-      th
-      th
-      th
-  tbody
+.row
+  .col-12
+    h1 = 'Playlist info'
+    p
+      | This are all the tracks inside that playlist. Select the tracks you want to share
+.row
+  .col-12
     = simple_form_for :track_ids, url: share_selected_tracks_path, method: 'post' do |f|
-      = f.simple_fields_for :ids do |sff|
-        - @playlist['items'].each do |item|
+      / = f.submit 'share selected track', class: 'share_button p-button--brand '
+      table
+        thead
           tr
-            td
-              = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil
-              = sff.label 'check to share', for: "track_ids_ids_" + item['track']['id'], required: false
-            td
-              - if item['track']['album']['images'].any?
-                = image_tag(item['track']['album']['images'].last['url'])
-              - else
-                = image_tag('http://via.placeholder.com/350x150'.last['url'])
-            td
-            td = item['track']['artists'][0]['name']
-            td = item['track']['name']
-            td
-              = link_to item['track']['external_urls']['spotify'], class: 'p-button--neutral', target: '_blank' do
-                i.material-icons
-                  = 'play_arrow'
-                = 'listen'
+            th
+            th
+            th
+            th
+            th
+            th
+        tbody
+          = f.simple_fields_for :ids do |sff|
+            = f.submit 'share selected track', class: 'share_button p-button--brand '
+            - @playlist['items'].each do |item|
+              tr
+                td
+                  = sff.input_field item['track']['id'], as: :boolean, checked_value: item['track']['id'], unchecked_value: nil
+                  = sff.label 'check to share', for: "track_ids_ids_" + item['track']['id'], required: false
+                td
+                  - if item['track']['album']['images'].any?
+                    = image_tag(item['track']['album']['images'].last['url'])
+                  - else
+                    = image_tag('http://via.placeholder.com/350x150'.last['url'])
+                td
+                td = item['track']['artists'][0]['name']
+                td = item['track']['name']
+                td
+                  = link_to item['track']['external_urls']['spotify'], class: 'p-button--neutral', target: '_blank' do
+                    i.material-icons
+                      = 'play_arrow'
+                    = 'listen'
       = f.submit 'share selected track', class: 'share_button p-button--brand '
 
 = render '/layouts/partials/loader_screen'
